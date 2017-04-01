@@ -1,8 +1,24 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'  // webpack can eliminate dead code from react-dom
 import MyTitle from './MyTitle'
-
+import '../public/normalize.css'
+import '../public/style.css'
 // var MyTitleFactory = React.createFactory(MyTitle)
+
+const App = React.createClass({
+  render: function () {
+    return (
+      /* class == className, since class is a reserved word */
+      <div className='app'>
+        <div className='landing'>
+          <h1>svideo</h1>
+          <input type='text' placeholder='Search' />
+          <a> or Browse All </a>
+        </div>
+      </div>
+    )
+  }
+})
 
 var MyFirstComponent = React.createClass({
   render: function () {
@@ -17,7 +33,13 @@ var MyFirstComponent = React.createClass({
 })
 
 // start rendering
-ReactDOM.render(React.createElement(MyFirstComponent),
+render(
+  (
+    <div>
+      <App />
+      <MyFirstComponent />
+    </div>
+  ),
 /* tells it where to put it */
   document.getElementById('app')
 )

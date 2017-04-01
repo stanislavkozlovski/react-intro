@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 var MyTitle = React.createClass({
   render: function () {
     const style = {color: this.props.color}
@@ -13,5 +12,11 @@ var MyTitle = React.createClass({
     )
   }
 })
+
+// Type validation for the props
+MyTitle.propTypes = {
+  color: React.PropTypes.string,
+  title: React.PropTypes.string
+}
 
 export default MyTitle

@@ -19,9 +19,30 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      },
+      {
         include: path.resolve(__dirname, 'js'),  // only files that are in the /js/ directory
         test: /\.js$/,  // if it ends in js
         loader: 'babel-loader'  // run it through babel-loader
+      },
+      {
+        test: /\.css/,
+        use: [
+          // pass multiple loaders
+          // less/sass loader if you want
+
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false
+            }
+          }
+        ]
       }
     ]
   }
