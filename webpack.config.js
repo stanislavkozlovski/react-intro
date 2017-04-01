@@ -19,6 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
+        include: path.resolve(__dirname, 'js'),  // only files that are in the /js/ directory
         test: /\.js$/,  // if it ends in js
         loader: 'babel-loader'  // run it through babel-loader
       }
