@@ -1,10 +1,15 @@
 import React from 'react'
-import preload from '../public/data.json'
 
 import ShowCard from './showcard.js'
-/* .map will iterate through everyone and fill an array of components */
-/* preload is the json object, preload.shows is an array */
+const { arrayOf, shape, string } = React.PropTypes
+
 const Search = React.createClass({
+  propTypes: {
+    shows: arrayOf(shape({
+      title: string,
+      description: string
+    }))
+  },
   getInitialState () {
     return {
       searchTerm: ''
@@ -25,12 +30,13 @@ const Search = React.createClass({
             type='text' placeholder='Search' />
         </header>
         <div>
-          {preload.shows
+          {this.props.shows
             .filter((show) => {
               return `${show.title} ${show.description}`.toUpperCase()
                 .indexOf(this.state.searchTerm.toUpperCase()) !== -1
             })
             .map((show) => {
+              /* .map will iterate through everyone and fill an array of components */
               return (
                 <ShowCard key={show.imdbID}/* unique ID per object so that in re-arranging cards it does not load them again, just change their position */
                   {...show} />

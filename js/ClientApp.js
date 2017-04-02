@@ -4,7 +4,9 @@ import { BrowserRouter, Match } from 'react-router'
 
 import Landing from './landing.js'
 import Search from './search.js'
+import Details from './details.js'
 import MyTitle from './MyTitle'
+import preload from '../public/data.json'
 import '../public/normalize.css'
 import '../public/style.css'
 // var MyTitleFactory = React.createFactory(MyTitle)
@@ -16,7 +18,20 @@ const App = React.createClass({
       <BrowserRouter>
         <div className='app'>
           <Match exactly pattern='/' component={Landing} />
-          <Match pattern='/search' component={Search} />
+          <Match
+            pattern='/search'
+            component={(props) => {
+              return <Search shows={preload.shows} {...props} />  // how you pass components
+            }}
+          />
+          <Match
+            pattern='/details/:id'
+            component={(props) => {
+              var show = preload.shows.filter((show) => show.imdbID === props.params.id)[0]
+              // return <Redirect>
+              return <Details show={show} {...props} />
+            }}
+          />
         </div>
       </BrowserRouter>
     )
