@@ -7,7 +7,7 @@ import ShowCard from './showcard.js'
 const Search = React.createClass({
   getInitialState () {
     return {
-      searchTerm: 'whatUP'
+      searchTerm: ''
     }
   },
   handleSearchTermChange (event) {
