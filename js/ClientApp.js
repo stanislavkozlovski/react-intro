@@ -38,10 +38,10 @@ var MyFirstComponent = React.createClass({
 // start rendering
 render(
   (
-    <div>
-      <App />
-      <MyFirstComponent />
-    </div>
+  <div>
+    <App />
+    <MyFirstComponent />
+  </div>
   ),
 /* tells it where to put it */
   document.getElementById('app')
