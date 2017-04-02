@@ -8,6 +8,9 @@ module.exports = {
     path: path.join(__dirname, '/public'),
     filename: 'bundle.js'
   },
+  devServer: {
+    publicPath: '/public/'  // setting up static file serving
+  },
   resolve: {
     extensions: ['.js', '.json']  // the type of file extensions it'll try to find when importing without an extension
   },

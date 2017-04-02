@@ -1,5 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'  // webpack can eliminate dead code from react-dom
+import { HashRouter, Match } from 'react-router'
+
+import Landing from './landing.js'
 import MyTitle from './MyTitle'
 import '../public/normalize.css'
 import '../public/style.css'
@@ -7,15 +10,13 @@ import '../public/style.css'
 
 const App = React.createClass({
   render: function () {
+    /* class == className, since class is a reserved word */
     return (
-      /* class == className, since class is a reserved word */
-      <div className='app'>
-        <div className='landing'>
-          <h1>svideo</h1>
-          <input type='text' placeholder='Search' />
-          <a> or Browse All </a>
+      <HashRouter>
+        <div className='app'>
+          <Match exactly pattern='/' component={Landing} />
         </div>
-      </div>
+      </HashRouter>
     )
   }
 })
