@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'  // webpack can eliminate dead code from react-dom
-import { HashRouter, Match } from 'react-router'
+import { BrowserRouter, Match } from 'react-router'
 
 import Landing from './landing.js'
 import Search from './search.js'
@@ -13,12 +13,12 @@ const App = React.createClass({
   render: function () {
     /* class == className, since class is a reserved word */
     return (
-      <HashRouter>
+      <BrowserRouter>
         <div className='app'>
           <Match exactly pattern='/' component={Landing} />
           <Match pattern='/search' component={Search} />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     )
   }
 })

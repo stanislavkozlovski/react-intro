@@ -9,7 +9,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    publicPath: '/public/'  // setting up static file serving
+    publicPath: '/public/',  // setting up static file serving
+    historyApiFallback: true  // reroute 404s to the homepage
   },
   resolve: {
     extensions: ['.js', '.json']  // the type of file extensions it'll try to find when importing without an extension
@@ -26,6 +27,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.json$/,  // load json from files
+        loader: 'json-loader'
       },
       {
         include: path.resolve(__dirname, 'js'),  // only files that are in the /js/ directory
