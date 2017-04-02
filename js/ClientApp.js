@@ -3,6 +3,7 @@ import { render } from 'react-dom'  // webpack can eliminate dead code from reac
 import { HashRouter, Match } from 'react-router'
 
 import Landing from './landing.js'
+import Search from './search.js'
 import MyTitle from './MyTitle'
 import '../public/normalize.css'
 import '../public/style.css'
@@ -15,6 +16,7 @@ const App = React.createClass({
       <HashRouter>
         <div className='app'>
           <Match exactly pattern='/' component={Landing} />
+          <Match pattern='/search' component={Search} />
         </div>
       </HashRouter>
     )
