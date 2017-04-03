@@ -15,8 +15,8 @@ const Landing = React.createClass({
     dispath: func
   },
   handleSearchTermChange (event) {
-    let srchTrmResults = setSearchTerm(event.target.value)
-    this.props.dispatch(srchTrmResults)
+    let srchTrmResultsActionObject = setSearchTerm(event.target.value)
+    this.props.dispatch(srchTrmResultsActionObject)  // dispatches down the line to find the appropriate reducer
   },
   handleSearchSubmit (event) {
     // enters on input Enter pressed

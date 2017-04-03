@@ -1,9 +1,10 @@
 import React from 'react'
-import axios from 'axios'  // AJAX client
 
+import { connect } from 'react-redux'
+import { getOMDBDetails } from './actionCreators.js'
 import Header from './header.js'
 
-const { shape, string } = React.PropTypes
+const { func, shape, string } = React.PropTypes
 
 const Details = React.createClass({
   propTypes: {
@@ -14,26 +15,24 @@ const Details = React.createClass({
       poster: string,
       trailer: string,
       imdbID: string
-    })
-  },
-  getInitialState () {
-    return {
-      omdbData: {}
-    }
+    }),
+    omdbData: shape({
+      imdbII: string
+    }),
+    dispatch: func
   },
   componentDidMount () {
-    axios.get(`http://www.omdbapi.com/?i=${this.props.show.imdbID}`)
-      .then((response) => {  // you need arrow function here for "this" to work, because we're not creating new context, otherwise we'd need to .bind(this)
-        this.setState({omdbData: response.data})
-      })
-      .catch((error) => console.error('axios error', error))
+    if (!this.props.omdbData.imdbRating) {
+      // AJAX only when neeed
+      this.props.dispatch(getOMDBDetails(this.props.show.imdbID))
+    }
   },
   render () {
     const { title, description, year, poster, trailer } = this.props.show
     let rating
-    if (this.state.omdbData.imdbRating) {
+    if (this.props.omdbData.imdbRating) {
       // if the API call has loaded
-      rating = <h3>{this.state.omdbData.imdbRating}</h3>
+      rating = <h3>{this.props.omdbData.imdbRating}</h3>
     } else {
       rating = <img src='/public/img/loading.png' alt='loading indicaton' />
     }
@@ -62,4 +61,12 @@ const Details = React.createClass({
 //   return <h1>{props.params.id}</h1>
 // }
 
-export default Details
+const mapStateToProps = (state, ownProps/* props for the react component */) => {
+  const omdbData = state.omdbData[ownProps.show.imdbID] ? state.omdbData[ownProps.show.imdbID] : {}
+
+  return {
+    omdbData: omdbData
+  }
+}
+
+export default connect(mapStateToProps)(Details)

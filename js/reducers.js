@@ -1,9 +1,10 @@
-import { SET_SEARCH_TERM } from './actions.js'
+// reducer is a function which modifies the state
+import { SET_SEARCH_TERM, ADD_OMDB_DATA } from './actions.js'
 
 const DEFAULT_STATE = {
-  searchTerm: ''
+  searchTerm: '',
+  omdbData: {}
 }
-
 const setSearchTerm = (state, action) => {
   const newState = {}
 
@@ -13,6 +14,13 @@ const setSearchTerm = (state, action) => {
   return newState
   // return Object.assign({}, state, {searchTerm: action.searchTerm})
 }
+const addOMDBData = (state, action) => {
+  const newOMDBData = {}
+  Object.assign(newOMDBData, state.omdbData, {[action.imdbId]: action.omdbData})
+  const newState = {}
+  Object.assign(newState, state, {omdbData: newOMDBData})
+  return newState
+}
 
 const rootReducer = (state = DEFAULT_STATE, action) => {
   // dispatches actions to appropriate reducer
@@ -21,6 +29,10 @@ const rootReducer = (state = DEFAULT_STATE, action) => {
     case SET_SEARCH_TERM:
       // dispatch to the setSearchTerm reducer
       return setSearchTerm(state, action)
+
+    case ADD_OMDB_DATA:
+      return addOMDBData(state, action)
+
     default:
       return state
   }
