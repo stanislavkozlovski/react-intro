@@ -23,7 +23,7 @@ const Details = React.createClass({
   },
   componentDidMount () {
     axios.get(`http://www.omdbapi.com/?i=${this.props.show.imdbID}`)
-      .then((response) => {
+      .then((response) => {  // you need arrow function here for "this" to work, because we're not creating new context, otherwise we'd need to .bind(this)
         this.setState({omdbData: response.data})
       })
       .catch((error) => console.error('axios error', error))
