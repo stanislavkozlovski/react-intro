@@ -6,7 +6,8 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: path.join(__dirname, '/public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/public/'  // additional bundles reside here
   },
   devServer: {
     publicPath: '/public/',  // setting up static file serving

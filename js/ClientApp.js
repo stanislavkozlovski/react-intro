@@ -4,7 +4,8 @@ import { BrowserRouter, Match } from 'react-router'
 import { Provider } from 'react-redux'  // small library for integrating redux into react
 
 import store from './store.js'
-import Landing from './landing.js'
+// import Landing from './landing.js'
+import AsyncRoute from './asyncRoute.js'
 import Search from './search.js'
 import Details from './details.js'
 import MyTitle from './MyTitle'
@@ -20,7 +21,11 @@ const App = React.createClass({
       <BrowserRouter>
         <Provider store={store}>
           <div className='app'>
-            <Match exactly pattern='/' component={Landing} />
+            <Match
+              exactly
+              pattern='/'
+              component={(props) => <AsyncRoute props={props} loadingPromise={System.import('./landing.js')} />}
+            />
             <Match
               pattern='/search'
               component={(props) => {
